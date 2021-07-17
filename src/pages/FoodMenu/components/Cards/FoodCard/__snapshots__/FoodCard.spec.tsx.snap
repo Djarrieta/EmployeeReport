@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FoodCard Test should match snapshot 1`] = `
+<div>
+  <article
+    class="makeStyles-paper-2"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+    >
+      <div
+        class="MuiGrid-root makeStyles-imgContainer-1 MuiGrid-item"
+      >
+        <button
+          class="MuiButtonBase-root"
+          data-testid="img-button"
+          tabindex="0"
+          type="button"
+        >
+          <img
+            alt="Food item"
+            class="makeStyles-img-3"
+            src="/images/food.jpg"
+          />
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-direction-xs-column MuiGrid-grid-xs-true"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true"
+        >
+          <h6
+            class="MuiTypography-root makeStyles-title-4 MuiTypography-subtitle1 MuiTypography-gutterBottom"
+          >
+            some food
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
+          >
+            some description
+          </p>
+        </div>
+        <div
+          class="MuiGrid-root makeStyles-priceContainer-5 MuiGrid-item MuiGrid-grid-xs-true"
+        >
+          <h6
+            class="MuiTypography-root makeStyles-highLight-6 MuiTypography-subtitle1"
+          >
+            $4.30
+          </h6>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button-7 MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Add
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FoodImage Test should match snapshot 1`] = `
+<div>
+  <img
+    alt="Food item"
+    src="/images/food.jpg"
+  />
+</div>
+`;

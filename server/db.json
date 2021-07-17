@@ -1,0 +1,205 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "employ 1",
+      "HD": 0,
+      "HN": 0
+    },
+    {
+      "id": 2,
+      "name": "employ 2",
+      "HD": 0,
+      "HN": 0
+    }
+  ],
+  "reports": [],
+  "orders": [],
+  "menu": {
+    "foods": [
+      {
+        "id": 1,
+        "name": "Avo on toast",
+        "type": "MAIN",
+        "price": "8.50",
+        "cover": "avo-on-toast.jpg",
+        "description": "Toast with avocado puree, salt, black pepper and citrus juice"
+      },
+      {
+        "id": 2,
+        "name": "Gin and Tonic",
+        "type": "DRINK",
+        "price": "9.05",
+        "cover": "gin-and-tonic.jpg",
+        "description": "Cocktail consisting of gin and tonic water served with ice"
+      },
+      {
+        "id": 3,
+        "name": "Roasted pork belly",
+        "type": "MAIN",
+        "price": "11.00",
+        "cover": "pork-belly-and-kimchi.jpg",
+        "description": "Roasted pork belly with kimchi and soy sauce glaze"
+      },
+      {
+        "id": 4,
+        "name": "Milhojas",
+        "type": "DESSERT",
+        "price": "6.80",
+        "cover": "milhojas.jpg",
+        "description": "Rectangular shaped cake, containing meringue or pastry cream between two layers of puff pastry sprinkled with icing sugar"
+      },
+      {
+        "id": 5,
+        "name": " Vegan Fried Bacon Mac and Cheese",
+        "type": "MAIN",
+        "price": "10.00",
+        "cover": "bacon-mac-and-cheese.jpg",
+        "description": "Mac and cheese with crunchy seitan ‘bacon’ (V)"
+      },
+      {
+        "id": 6,
+        "name": "White Russian",
+        "type": "DRINK",
+        "price": "9.20",
+        "cover": "white-russian.jpg",
+        "description": "Cocktail made with vodka, coffee-flavored liqueur and single cream"
+      },
+      {
+        "id": 7,
+        "name": "Bandeja paisa",
+        "type": "MAIN",
+        "price": "9.50",
+        "cover": "bandeja-paisa.jpg",
+        "description": "Tray with beans, pork rinds, ground beef and rice. Accompanied by ripe banana and avocado"
+      },
+      {
+        "id": 8,
+        "name": "Mojito",
+        "type": "DRINK",
+        "price": "8.00",
+        "cover": "mojito.jpg",
+        "description": "Cocktail made with rum, lemon, mint or eucalyptus and mineral water"
+      },
+      {
+        "id": 9,
+        "name": "Natilla",
+        "type": "DESSERT",
+        "price": "7.50",
+        "cover": "natilla.jpeg",
+        "description": "Dreamy dairy dessert made with milk, egg yolks, sugar and aromas such as vanilla or lemon"
+      },
+      {
+        "id": 10,
+        "name": "Old Fashioned",
+        "type": "DRINK",
+        "price": "9.00",
+        "cover": "old-fashioned.jpg",
+        "description": "Cocktail made with sugar, bitters, whiskey, and garnished with a citrus twist"
+      },
+      {
+        "id": 11,
+        "name": "Pesto pasta",
+        "type": "MAIN",
+        "price": "9.50",
+        "cover": "pesto-pasta.jpg",
+        "description": "Pesto pasta with pine nuts and mozzarella"
+      },
+      {
+        "id": 12,
+        "name": "Michelada",
+        "type": "DRINK",
+        "price": "7.00",
+        "cover": "michelada.jpg",
+        "description": "Mexican alcoholic drink that is prepared by mixing beer, lemon juice, spicy and salt"
+      },
+      {
+        "id": 13,
+        "name": "Mazamorra",
+        "type": "DESSERT",
+        "price": "7.20",
+        "cover": "mazamorra.jpg",
+        "description": "Dessert prepared with very well cooked peeled corn, and sweetened with raw sugar cane cubes"
+      }
+    ],
+    "promotions": [
+      {
+        "id": 1,
+        "name": "Main and Drink",
+        "cover": "special-offer.png",
+        "closedPrice": null,
+        "customizable": [
+          {
+            "foodType": "DRINK",
+            "quantity": 1
+          },
+          {
+            "foodType": "MAIN",
+            "quantity": 1
+          }
+        ],
+        "description": "Hot offer! Get 10% off each main and drink combo",
+        "discountPercentage": 10,
+        "closedValues": []
+      },
+      {
+        "id": 2,
+        "name": "Hungry Date",
+        "cover": "special-offer.png",
+        "closedPrice": "40.00",
+        "customizable": [
+          {
+            "foodType": "DRINK",
+            "quantity": 2
+          },
+          {
+            "foodType": "MAIN",
+            "quantity": 2
+          },
+          {
+            "foodType": "DESSERT",
+            "quantity": 1
+          }
+        ],
+        "description": "Hungry Date Offer! Get 2 mains + 2 drinks + 1 dessert in special price",
+        "discountPercentage": null,
+        "closedValues": []
+      },
+      {
+        "id": 3,
+        "name": "Colombian lunch",
+        "cover": "colombia.png",
+        "closedPrice": "20.40",
+        "customizable": [],
+        "description": "Get a full colombian experience with bandeja paisa, michelada and mazamorra combo",
+        "discountPercentage": null,
+        "closedValues": [
+          {
+            "id": 7,
+            "name": "Bandeja paisa",
+            "type": "MAIN",
+            "price": "9.50",
+            "cover": "bandeja-paisa.jpg",
+            "description": "Tray with beans, pork rinds, ground beef and rice. Accompanied by ripe banana and avocado"
+          },
+          {
+            "id": 12,
+            "name": "Michelada",
+            "type": "DRINK",
+            "price": "7.00",
+            "cover": "michelada.jpg",
+            "description": "Mexican alcoholic drink that is prepared by mixing beer, lemon juice, spicy and salt"
+          },
+          {
+            "id": 13,
+            "name": "Mazamorra",
+            "type": "DESSERT",
+            "price": "7.20",
+            "cover": "mazamorra.jpg",
+            "description": "Dessert prepared with very well cooked peeled corn, and sweetened with raw sugar cane cubes"
+          }
+        ]
+      }
+    ]
+  }
+}
