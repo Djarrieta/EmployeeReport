@@ -8,11 +8,11 @@ pipeline {
           sh 'npm install' 
       }
     }
-/*     stage('Test'){
+    stage('Test'){
       steps {
           sh 'npm test' 
       }
-    } */
+    }
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
