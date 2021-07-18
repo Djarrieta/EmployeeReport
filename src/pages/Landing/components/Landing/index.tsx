@@ -28,7 +28,7 @@ export const Landing: React.FC<LandingProps> = ({ onContinue }) => {
         helperText={showError && 'Incorrect entry.'}
         onChange={(e) => setText(e.target.value)}
         id="outlined-basic"
-        label="Full name"
+        label="Username"
         variant="outlined"
         onKeyPress={(event) => {
           if (event.code === 'Enter') {
