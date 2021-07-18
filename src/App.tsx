@@ -14,7 +14,7 @@ const App: React.FC = () => {
     data: { sessionId },
   } = useContext(SessionContext);
   return (
-    <>
+    <div className="app">
       <Router>
         <Header />
         <Switch>
@@ -41,7 +41,7 @@ const App: React.FC = () => {
           />
         </Switch>
       </Router>
-    </>
+    </div>
   );
 };
 
