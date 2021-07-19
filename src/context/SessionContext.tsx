@@ -13,6 +13,7 @@ export const useStateContainer = (initialState: SessionState = {}) => {
       return;
     }
     if (!username) {
+      setSessionId(undefined);
       return;
     }
     setSessionId(sessionService.createSession(username));

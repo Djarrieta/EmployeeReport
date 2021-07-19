@@ -16,11 +16,14 @@ import { deleteSession } from 'services/sessionService';
 export const Header: FC = () => {
   const {
     data: { sessionId },
+    mutations: { setUsername },
   } = useContext(SessionContext);
   const name = sessionId?.split(':::')[1];
   const history = useHistory();
+
   const signOut = () => {
-    deleteSession();
+    localStorage.clear();
+    setUsername(undefined);
     history.push('/');
   };
   return (
