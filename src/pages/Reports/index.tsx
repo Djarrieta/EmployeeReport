@@ -1,10 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { Container, TextField, Typography } from '@material-ui/core';
-import { RouteComponentProps } from 'react-router-dom';
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@material-ui/core';
 import axios from 'axios';
+import { EmployeeModel } from 'pages/Employees/models/EmployeeModel';
+import React, { useEffect, useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { dateFormat } from 'utils/text';
 
 export const ReportPage: React.FC<RouteComponentProps> = () => {
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState<EmployeeModel[]>([]);
+  const [reportData, setReportData] = useState<{
+    employ: string | unknown | undefined;
+    start: string;
+    finish: string;
+  }>({
+    employ: '',
+    start: dateFormat(new Date()),
+    finish: dateFormat(new Date()),
+  });
 
   useEffect(() => {
     axios
@@ -14,13 +32,45 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
   }, []);
 
   return (
-    <Container>
-      <Typography variant="body2" align="center" color="textSecondary">
-        REPORT
-      </Typography>
-      <TextField label="Employ" />
-      <TextField label="Start" />
-      <TextField label="End" />
-    </Container>
+    <FormControl>
+      <InputLabel id="employeeLabel">Employee</InputLabel>
+      <Select
+        labelId="employeeLabel"
+        value={reportData.employ}
+        onChange={({ target: value }) =>
+          setReportData({ ...reportData, employ: value.value })
+        }
+      >
+        {employees.map((employee) => (
+          <MenuItem key={employee.id} value={employee.name}>
+            {employee.name}
+          </MenuItem>
+        ))}
+      </Select>
+
+      <TextField
+        label="Start"
+        type="datetime-local"
+        value={reportData.start}
+        onChange={(event) =>
+          setReportData({ ...reportData, start: event.target.value })
+        }
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      <TextField
+        label="Finish"
+        type="datetime-local"
+        value={reportData.finish}
+        onChange={(event) =>
+          setReportData({ ...reportData, finish: event.target.value })
+        }
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      <Button onClick={() => console.log(reportData)}>Save</Button>
+    </FormControl>
   );
 };

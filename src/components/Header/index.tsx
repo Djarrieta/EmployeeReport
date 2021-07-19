@@ -18,11 +18,12 @@ export const Header: FC = () => {
     data: { sessionId },
     mutations: { setUsername },
   } = useContext(SessionContext);
+
   const name = sessionId?.split(':::')[1];
   const history = useHistory();
 
   const signOut = () => {
-    localStorage.clear();
+    deleteSession();
     setUsername(undefined);
     history.push('/');
   };
