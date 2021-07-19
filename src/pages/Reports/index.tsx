@@ -23,6 +23,20 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
     start: dateFormat(new Date()),
     finish: dateFormat(new Date()),
   });
+  const [employeeError, setEmployeeError] = useState<boolean>(false);
+  const [dateError, setDateError] = useState<boolean>(false);
+  useEffect(() => {
+    if (reportData.employ === '') {
+      setEmployeeError(true);
+    } else {
+      setEmployeeError(false);
+    }
+    if (reportData.start > reportData.finish) {
+      setDateError(true);
+    } else {
+      setDateError(false);
+    }
+  }, [reportData]);
 
   useEffect(() => {
     axios
@@ -35,6 +49,7 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
     <FormControl>
       <InputLabel id="employeeLabel">Employee</InputLabel>
       <Select
+        error={employeeError}
         labelId="employeeLabel"
         value={reportData.employ}
         onChange={({ target: value }) =>
@@ -66,6 +81,8 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
         onChange={(event) =>
           setReportData({ ...reportData, finish: event.target.value })
         }
+        error={dateError}
+        helperText="Invalid finish date"
         InputLabelProps={{
           shrink: true,
         }}
