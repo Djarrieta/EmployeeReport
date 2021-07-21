@@ -3,14 +3,14 @@
     {
       "id": 1,
       "name": "employ 1",
-      "HD": 4,
-      "HN": 0
+      "HD": 1,
+      "HN": 1
     },
     {
       "id": 2,
       "name": "employ 2",
-      "HD": 0,
-      "HN": 0
+      "HD": 12,
+      "HN": 11
     }
   ]
 }
