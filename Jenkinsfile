@@ -18,7 +18,7 @@ pipeline {
           sh 'npm test' 
       }
       steps {
-          sh 'npm test:coverage' 
+          sh 'npm run test:coverage' 
       }
     }
     stage('Static Code Analysis') {
