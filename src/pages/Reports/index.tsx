@@ -1,42 +1,44 @@
 import {
   Button,
-  FormControl,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from '@material-ui/core';
 import axios from 'axios';
+import moment from 'moment';
 import { EmployeeModel } from 'pages/Employees/models/EmployeeModel';
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { dateFormat } from 'utils/text';
+import { dateFormat, hoursArray } from 'utils/date';
+import { dayNightHoursCalculator } from 'pages/Reports/hooks/dayNightHoursCalculator';
 
 export const ReportPage: React.FC<RouteComponentProps> = () => {
   const [employees, setEmployees] = useState<EmployeeModel[]>([]);
-  const [reportData, setReportData] = useState<{
-    employ: string | unknown | undefined;
-    start: string;
-    finish: string;
-  }>({
-    employ: '',
-    start: dateFormat(new Date()),
-    finish: dateFormat(new Date()),
-  });
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<string>('');
+  const [startDate, setStartDate] = useState<string>(
+    moment().format(dateFormat),
+  );
+  const [finishDate, setFinishDate] = useState<string>(
+    moment().format(dateFormat),
+  );
+  const [startTime, setStartTime] = useState<number>(7);
+  const [finishTime, setFinishTime] = useState<number>(18);
   const [employeeError, setEmployeeError] = useState<boolean>(false);
   const [dateError, setDateError] = useState<boolean>(false);
+
   useEffect(() => {
-    if (reportData.employ === '') {
+    if (selectedEmployeeId === '') {
       setEmployeeError(true);
     } else {
       setEmployeeError(false);
     }
-    if (reportData.start > reportData.finish) {
+    if (startDate >= finishDate) {
       setDateError(true);
     } else {
       setDateError(false);
     }
-  }, [reportData]);
+  }, [selectedEmployeeId, startDate, finishDate]);
 
   useEffect(() => {
     axios
@@ -46,48 +48,81 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
   }, []);
 
   return (
-    <FormControl>
-      <InputLabel id="employeeLabel">Employee</InputLabel>
-      <Select
-        error={employeeError}
-        labelId="employeeLabel"
-        value={reportData.employ}
-        onChange={({ target: value }) =>
-          setReportData({ ...reportData, employ: value.value })
+    <form>
+      <div>
+        <InputLabel id="employeeLabel">Employee</InputLabel>
+        <Select
+          error={employeeError}
+          labelId="employeeLabel"
+          value={selectedEmployeeId}
+          onChange={({ target: value }) =>
+            setSelectedEmployeeId(value.value as string)
+          }
+        >
+          {employees.map((employee) => (
+            <MenuItem key={employee.id} value={employee.id}>
+              {employee.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </div>
+
+      <div>
+        <span>Start</span>
+        <TextField
+          type="date"
+          value={moment(startDate).format(dateFormat)}
+          onChange={(event) => setStartDate(event.target.value)}
+        />
+        <div>
+          <InputLabel id="startTimeLabel">Start Hour</InputLabel>
+          <Select
+            labelId="startTimeLabel"
+            value={startTime}
+            onChange={({ target: value }) =>
+              setStartTime(value.value as number)
+            }
+          >
+            {hoursArray.map((i) => (
+              <MenuItem key={i} value={i}>
+                {i}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+      </div>
+
+      <div>
+        <span>Finish</span>
+        <TextField
+          type="date"
+          value={moment(finishDate).format(dateFormat)}
+          onChange={(event) => setFinishDate(event.target.value)}
+        />
+        <div>
+          <InputLabel id=" finisTimeLabel">Finish Hour</InputLabel>
+          <Select
+            labelId="finisTimeLabel"
+            value={finishTime}
+            onChange={({ target: value }) =>
+              setFinishTime(value.value as number)
+            }
+          >
+            {hoursArray.map((i) => (
+              <MenuItem key={i} value={i}>
+                {i}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+      </div>
+      <Button
+        onClick={() =>
+          dayNightHoursCalculator(startDate, finishDate, startTime, finishTime)
         }
       >
-        {employees.map((employee) => (
-          <MenuItem key={employee.id} value={employee.name}>
-            {employee.name}
-          </MenuItem>
-        ))}
-      </Select>
-
-      <TextField
-        label="Start"
-        type="datetime-local"
-        value={reportData.start}
-        onChange={(event) =>
-          setReportData({ ...reportData, start: event.target.value })
-        }
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <TextField
-        label="Finish"
-        type="datetime-local"
-        value={reportData.finish}
-        onChange={(event) =>
-          setReportData({ ...reportData, finish: event.target.value })
-        }
-        error={dateError}
-        helperText="Invalid finish date"
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <Button onClick={() => console.log(reportData)}>Save</Button>
-    </FormControl>
+        Save
+      </Button>
+    </form>
   );
 };

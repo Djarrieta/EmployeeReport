@@ -29,8 +29,9 @@ export const SessionContext = createContext<
   ReturnType<typeof useStateContainer>
 >({} as never);
 
-export const SessionProvider: React.FC = ({ children }) => {
+export const SessionProvider: React.FC = ({ children }): JSX.Element => {
   const contextValue = useStateContainer(sessionService.recoverSession());
+
   return (
     <SessionContext.Provider value={contextValue}>
       {children}
