@@ -8,9 +8,17 @@ pipeline {
           sh 'npm install' 
       }
     }
+    stage('Lint'){
+      steps {
+          sh 'npm run lint' 
+      }
+    }
     stage('Test'){
       steps {
           sh 'npm test' 
+      }
+      steps {
+          sh 'npm test:coverage' 
       }
     }
     stage('Static Code Analysis') {

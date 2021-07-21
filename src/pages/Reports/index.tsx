@@ -54,7 +54,6 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
       startTime,
       finishTime,
     );
-
     console.log(totalHours);
   };
 
