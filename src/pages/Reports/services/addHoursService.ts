@@ -5,7 +5,7 @@ import { HoursModel } from '../models/HoursModel';
 export const addHoursService = async (
   hours: HoursModel,
   employeeId: string,
-) => {
+): Promise<void> => {
   const employData = await axios
     .get(`${URL}/employees/${employeeId}`)
     .then((response) => response);

@@ -2,7 +2,14 @@ import React, { createContext, useEffect, useRef, useState } from 'react';
 import { SessionState } from 'context/models/SessionState';
 import * as sessionService from '../services/sessionService';
 
-export const useStateContainer = (initialState: SessionState = {}) => {
+export const useStateContainer = (
+  initialState: SessionState = {},
+): {
+  data: { username: string | undefined; sessionId: string | undefined };
+  mutations: {
+    setUsername: React.Dispatch<React.SetStateAction<string | undefined>>;
+  };
+} => {
   const [username, setUsername] = useState(initialState.username);
   const [sessionId, setSessionId] = useState(initialState.sessionId);
   const usernameRef = useRef(false);

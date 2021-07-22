@@ -22,18 +22,25 @@ const App: React.FC = () => {
             path="/"
             exact
             canActivate={sessionId === undefined}
-            redirectTo="/reports"
+            redirectTo="/Reports"
             component={LandingPage}
           />
           <ConditionalRoute
-            path="/reports"
+            path="/Login"
+            exact
+            canActivate={sessionId === undefined}
+            redirectTo="/Reports"
+            component={LandingPage}
+          />
+          <ConditionalRoute
+            path="/Reports"
             exact
             canActivate={sessionId !== undefined}
             redirectTo="/"
             component={ReportPage}
           />
           <ConditionalRoute
-            path="/employees"
+            path="/Employees"
             exact
             canActivate={sessionId !== undefined}
             redirectTo="/"

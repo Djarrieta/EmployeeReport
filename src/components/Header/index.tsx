@@ -2,16 +2,16 @@ import React, { FC, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import {
   AppBar,
+  Box,
+  Button,
   IconButton,
   Toolbar,
   Typography,
-  Button,
-  Box,
 } from '@material-ui/core';
-import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
-
+import { SpeakerNotes } from '@material-ui/icons';
 import { SessionContext } from 'context/SessionContext';
 import { deleteSession } from 'services/sessionService';
+import { HeaderElement } from './HeaderElement';
 
 export const Header: FC = () => {
   const {
@@ -28,34 +28,27 @@ export const Header: FC = () => {
     history.push('/');
   };
   return (
-    <div>
-      <AppBar position="static">
-        <Box display="flex" alignContent="space-between" width="100%">
-          <Toolbar>
-            <IconButton edge="start" color="inherit" aria-label="menu">
-              <AccessAlarmIcon />
-            </IconButton>
-            <Typography variant="h6">
-              <Link to="/reports">Reports</Link>
-            </Typography>
-            <Typography variant="h6">
-              <Link to="/employees">Employees</Link>
-            </Typography>
-          </Toolbar>
+    <AppBar position="static">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="justify"
+        width="100%"
+      >
+        <Toolbar>
           {sessionId ? (
-            <div>
-              <span>{name}</span>
+            <>
+              <HeaderElement name="Reports" path="/Reports" />
+              <HeaderElement name="Employees" path="/Employees" />
               <Button type="button" onClick={signOut}>
-                Sign Out
+                <HeaderElement name={name ?? ''} path="/" />
               </Button>
-            </div>
+            </>
           ) : (
-            <Typography variant="h6">
-              <Link to="/">Login</Link>
-            </Typography>
+            <HeaderElement name="Login" path="/Login" />
           )}
-        </Box>
-      </AppBar>
-    </div>
+        </Toolbar>
+      </Box>
+    </AppBar>
   );
 };
