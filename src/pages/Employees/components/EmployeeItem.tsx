@@ -10,8 +10,11 @@ import {
 import { Delete, Person } from '@material-ui/icons';
 import { EmployeeModel } from '../models/EmployeeModel';
 
-export const EmployeeItem = (props: { employee: EmployeeModel }) => {
-  const { employee } = props;
+export const EmployeeItem = (props: {
+  employee: EmployeeModel;
+  handleDelete: (employId: number | undefined) => void;
+}): JSX.Element => {
+  const { employee, handleDelete } = props;
   return (
     <ListItem>
       <ListItemAvatar>
@@ -20,9 +23,15 @@ export const EmployeeItem = (props: { employee: EmployeeModel }) => {
         </Avatar>
       </ListItemAvatar>
       <ListItemText primary={employee.name} />
-      <ListItemText primary={employee.HD} />
+      <ListItemText primary={employee.id} />
+      <ListItemText primary={`HD:${employee.HD}`} />
+      <ListItemText primary={`HN:${employee.HN}`} />
       <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete">
+        <IconButton
+          edge="end"
+          aria-label="delete"
+          onClick={() => handleDelete(employee.id)}
+        >
           <Delete />
         </IconButton>
       </ListItemSecondaryAction>
