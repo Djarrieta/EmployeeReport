@@ -5,7 +5,6 @@ import {
   Select,
   TextField,
 } from '@material-ui/core';
-import axios from 'axios';
 import moment from 'moment';
 import { EmployeeModel } from 'pages/Employees/models/EmployeeModel';
 import React, { useEffect, useState } from 'react';
@@ -13,6 +12,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { dateFormat, hoursArray } from 'utils/date';
 import { dayNightHoursCalculator } from 'pages/Reports/hooks/dayNightHoursCalculator';
 import { employeesService } from '../Employees/services/employeesService';
+import { addHoursService } from './services/addHoursService';
 
 export const ReportPage: React.FC<RouteComponentProps> = () => {
   const [employees, setEmployees] = useState<EmployeeModel[]>([]);
@@ -54,7 +54,7 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
       startTime,
       finishTime,
     );
-    console.log(totalHours);
+    addHoursService(totalHours, selectedEmployeeId);
   };
 
   return (

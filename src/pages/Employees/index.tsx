@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Container } from '@material-ui/core';
-import { RouteComponentProps } from 'react-router-dom';
+import { Container, List, Typography } from '@material-ui/core';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { EmployeeItem } from './components/EmployeeItem';
 import { EmployeeModel } from './models/EmployeeModel';
 
 export const EmployeesPage: React.FC<RouteComponentProps> = () => {
@@ -24,25 +25,17 @@ export const EmployeesPage: React.FC<RouteComponentProps> = () => {
       >
         +
       </button>
-      <ol>
-        {employees.map((employee) => {
-          return (
-            <li>
-              <span> {employee.name}</span>
-              <span> HD: {employee.HD}</span>
-              <span> HN: {employee.HN}</span>
-              <button
-                type="button"
-                onClick={() => {
-                  console.log('delete');
-                }}
-              >
-                -
-              </button>
-            </li>
-          );
-        })}
-      </ol>
+
+      <div>
+        <Typography variant="h6">Employees</Typography>
+        <div>
+          <List>
+            {employees.map((employee) => {
+              return <EmployeeItem employee={employee} />;
+            })}
+          </List>
+        </div>
+      </div>
     </Container>
   );
 };

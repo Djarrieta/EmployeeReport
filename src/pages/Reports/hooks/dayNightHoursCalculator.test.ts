@@ -1,4 +1,4 @@
-import { dayNightHoursCalculator } from '../hooks/dayNightHoursCalculator';
+import { dayNightHoursCalculator } from './dayNightHoursCalculator';
 
 test('dayNightHoursCalculator', () => {
   const totalHours = dayNightHoursCalculator('2021-01-01', '2021-01-01', 4, 7);
