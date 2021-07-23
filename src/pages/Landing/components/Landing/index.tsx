@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Typography, TextField, Grid, Button, Card } from '@material-ui/core';
+import {
+  Typography,
+  TextField,
+  Grid,
+  Button,
+  Card,
+  Box,
+} from '@material-ui/core';
+import '../../styles/Landing.scss';
 
 export interface LandingProps {
   onContinue: (name: string) => void;
@@ -17,10 +25,7 @@ export const Landing: React.FC<LandingProps> = ({ onContinue }) => {
     onContinue(text);
   };
   return (
-    <Card>
-      <Typography variant="body2" align="center" color="textSecondary">
-        LOGIN
-      </Typography>
+    <Card className="card">
       <TextField
         fullWidth
         error={showError}
@@ -36,14 +41,16 @@ export const Landing: React.FC<LandingProps> = ({ onContinue }) => {
           }
         }}
       />
-      <Button
-        fullWidth
-        variant="contained"
-        color="primary"
-        onClick={() => handleInput()}
-      >
-        Continue
-      </Button>
+      <Box marginTop={3}>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={() => handleInput()}
+        >
+          Continue
+        </Button>
+      </Box>
     </Card>
   );
 };

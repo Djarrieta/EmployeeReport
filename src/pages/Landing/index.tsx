@@ -5,7 +5,7 @@ import { LandingContainer } from './containers/LandingContainer';
 
 export const LandingPage: React.FC<RouteComponentProps> = () => {
   return (
-    <Container>
+    <Container maxWidth="xs">
       <LandingContainer />
     </Container>
   );

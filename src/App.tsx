@@ -8,6 +8,7 @@ import { ConditionalRoute } from 'components/ConditionalRoute';
 import { Header } from 'components/Header';
 
 import './App.scss';
+import { Box, Container } from '@material-ui/core';
 
 const App: React.FC = () => {
   const {
@@ -17,36 +18,45 @@ const App: React.FC = () => {
     <div className="app">
       <Router>
         <Header />
-        <Switch>
-          <ConditionalRoute
-            path="/"
-            exact
-            canActivate={sessionId === undefined}
-            redirectTo="/Reports"
-            component={LandingPage}
-          />
-          <ConditionalRoute
-            path="/Login"
-            exact
-            canActivate={sessionId === undefined}
-            redirectTo="/Reports"
-            component={LandingPage}
-          />
-          <ConditionalRoute
-            path="/Reports"
-            exact
-            canActivate={sessionId !== undefined}
-            redirectTo="/"
-            component={ReportPage}
-          />
-          <ConditionalRoute
-            path="/Employees"
-            exact
-            canActivate={sessionId !== undefined}
-            redirectTo="/"
-            component={EmployeesPage}
-          />
-        </Switch>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="justify"
+          height="100%"
+        >
+          <Container maxWidth="sm" className="main">
+            <Switch>
+              <ConditionalRoute
+                path="/"
+                exact
+                canActivate={sessionId === undefined}
+                redirectTo="/Reports"
+                component={LandingPage}
+              />
+              <ConditionalRoute
+                path="/Login"
+                exact
+                canActivate={sessionId === undefined}
+                redirectTo="/Reports"
+                component={LandingPage}
+              />
+              <ConditionalRoute
+                path="/Reports"
+                exact
+                canActivate={sessionId !== undefined}
+                redirectTo="/"
+                component={ReportPage}
+              />
+              <ConditionalRoute
+                path="/Employees"
+                exact
+                canActivate={sessionId !== undefined}
+                redirectTo="/"
+                component={EmployeesPage}
+              />
+            </Switch>
+          </Container>
+        </Box>
       </Router>
     </div>
   );
