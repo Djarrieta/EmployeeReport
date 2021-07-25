@@ -1,5 +1,11 @@
-import React, { useContext, useEffect, useState, lazy } from 'react';
-import { Box, Button, List, TextField } from '@material-ui/core';
+import React, { useContext, useEffect, useState, lazy, Suspense } from 'react';
+import {
+  Box,
+  Button,
+  List,
+  TextField,
+  CircularProgress,
+} from '@material-ui/core';
 import { SessionContext } from 'context/SessionContext';
 import { RouteComponentProps } from 'react-router-dom';
 import { ContainerBox } from '../../components/ContainerBox/ContainerBox';
@@ -8,8 +14,14 @@ import { addEmployService } from './services/addEmployService';
 import { clearHoursService } from './services/clearHoursService';
 import { deleteEmployService } from './services/deleteEmployService';
 import { employeesService } from './services/employeesService';
-import { EmployeeItem } from './components/EmployeeItem';
+
 import './styles/Employees.scss';
+
+const EmployeeItem = lazy(() =>
+  import('./components/EmployeeItem').then((result) => {
+    return { default: result.EmployeeItem };
+  }),
+);
 
 export const EmployeesPage: React.FC<RouteComponentProps> = () => {
   const [employees, setEmployees] = useState<EmployeeModel[]>([]);
@@ -91,17 +103,19 @@ export const EmployeesPage: React.FC<RouteComponentProps> = () => {
 
         <Box marginTop={3}>
           <List>
-            {employees.map((employee) => {
-              return (
-                <EmployeeItem
-                  key={employee.id}
-                  employee={employee}
-                  handleDelete={(employeId: number | undefined) =>
-                    handleDelete(employeId)
-                  }
-                />
-              );
-            })}
+            <Suspense fallback={<CircularProgress />}>
+              {employees.map((employee) => {
+                return (
+                  <EmployeeItem
+                    key={employee.id}
+                    employee={employee}
+                    handleDelete={(employeId: number | undefined) =>
+                      handleDelete(employeId)
+                    }
+                  />
+                );
+              })}
+            </Suspense>
           </List>
         </Box>
       </div>

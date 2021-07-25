@@ -64,7 +64,7 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
       return;
     }
     if (dateError) {
-      setAlert(`${username}, finish date can´t be less than start date.`);
+      setAlert(`${username}, finish date can´t be earlier than start date.`);
       return;
     }
     const totalHours = dayNightHoursCalculator(
