@@ -8,10 +8,13 @@ export const useStateContainer = (
   data: { username: string | undefined; sessionId: string | undefined };
   mutations: {
     setUsername: React.Dispatch<React.SetStateAction<string | undefined>>;
+    setAlert: React.Dispatch<React.SetStateAction<string>>;
   };
+  alert: string;
 } => {
   const [username, setUsername] = useState(initialState.username);
   const [sessionId, setSessionId] = useState(initialState.sessionId);
+  const [alert, setAlert] = useState('');
   const usernameRef = useRef(false);
 
   useEffect(() => {
@@ -28,7 +31,8 @@ export const useStateContainer = (
 
   return {
     data: { username, sessionId },
-    mutations: { setUsername },
+    mutations: { setUsername, setAlert },
+    alert,
   };
 };
 

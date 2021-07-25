@@ -1,17 +1,22 @@
+import React, { useEffect, useState, useContext } from 'react';
+import { SessionContext } from 'context/SessionContext';
+import { RouteComponentProps } from 'react-router-dom';
+import moment from 'moment';
 import {
+  Box,
   Button,
+  FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
-  TextField,
 } from '@material-ui/core';
-import moment from 'moment';
+import { ContainerBox } from 'components/ContainerBox/ContainerBox';
 import { EmployeeModel } from 'pages/Employees/models/EmployeeModel';
-import React, { useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { dateFormat, hoursArray } from 'utils/date';
 import { dayNightHoursCalculator } from 'pages/Reports/hooks/dayNightHoursCalculator';
+import { dateFormat } from 'utils/date';
 import { employeesService } from '../Employees/services/employeesService';
+import { DateTimePickerCustom } from './components/DateTimePickerCustom';
 import { addHoursService } from './services/addHoursService';
 
 export const ReportPage: React.FC<RouteComponentProps> = () => {
@@ -27,10 +32,16 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
   const [finishTime, setFinishTime] = useState<number>(18);
   const [employeeError, setEmployeeError] = useState<boolean>(false);
   const [dateError, setDateError] = useState<boolean>(false);
+  const {
+    data: { username },
+    mutations: { setAlert },
+  } = useContext(SessionContext);
 
   useEffect(() => {
-    employeesService().then((employeesList) => setEmployees(employeesList));
-  }, []);
+    employeesService()
+      .then((employeesList) => setEmployees(employeesList))
+      .catch(() => setAlert('There was a problem loading the employees list.'));
+  }, [setAlert]);
 
   useEffect(() => {
     setEmployeeError(false);
@@ -48,87 +59,76 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
   }, [selectedEmployeeId, startDate, finishDate, startTime, finishTime]);
 
   const save = () => {
+    if (employeeError) {
+      setAlert(`${username}, theres is no employee selected.`);
+      return;
+    }
+    if (dateError) {
+      setAlert(`${username}, finish date can´t be less than start date.`);
+      return;
+    }
     const totalHours = dayNightHoursCalculator(
       startDate,
       finishDate,
       startTime,
       finishTime,
     );
-    addHoursService(totalHours, selectedEmployeeId);
+    addHoursService(totalHours, selectedEmployeeId).catch(() =>
+      setAlert('There was a problem adding hours to this employee.'),
+    );
+    setAlert(
+      `${totalHours.HD}/day and ${totalHours.HN}/night have been reported.`,
+    );
   };
 
   return (
-    <form>
-      {/* Employee */}
-      <div>
-        <InputLabel id="employeeLabel">Employee</InputLabel>
-        <Select
-          error={employeeError}
-          labelId="employeeLabel"
-          value={selectedEmployeeId}
-          onChange={({ target: value }) =>
-            setSelectedEmployeeId(value.value as string)
-          }
-        >
-          {employees.map((employee) => (
-            <MenuItem key={employee.id} value={employee.id}>
-              {employee.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </div>
-      {/* Start */}
-      <div>
-        <span>Start</span>
-        <TextField
-          type="date"
-          value={moment(startDate).format(dateFormat)}
-          onChange={(event) => setStartDate(event.target.value)}
-        />
-        <div>
-          <InputLabel id="startTimeLabel">Start Hour</InputLabel>
+    <ContainerBox name="Reports">
+      <Box display="flex" flexDirection="column" maxWidth="xs">
+        <FormControl>
+          <InputLabel id="inputLabelEmployee">Employee</InputLabel>
           <Select
-            labelId="startTimeLabel"
-            value={startTime}
+            labelId="inputLabelEmployee"
+            error={employeeError}
+            value={selectedEmployeeId}
             onChange={({ target: value }) =>
-              setStartTime(value.value as number)
+              setSelectedEmployeeId(value.value as string)
             }
           >
-            {hoursArray.map((i) => (
-              <MenuItem key={i} value={i}>
-                {i}
+            {employees.map((employee) => (
+              <MenuItem key={employee.id} value={employee.id}>
+                {employee.name}
               </MenuItem>
             ))}
           </Select>
-        </div>
-      </div>
-      {/* Finish */}
-      <div>
-        <span>Finish</span>
-        <TextField
-          type="date"
-          value={moment(finishDate).format(dateFormat)}
-          onChange={(event) => setFinishDate(event.target.value)}
-          error={dateError}
+          {!employeeError && <FormHelperText>Incorrect entry.</FormHelperText>}
+        </FormControl>
+        <DateTimePickerCustom
+          name="Start"
+          date={startDate}
+          time={startTime}
+          setDate={setStartDate}
+          setTime={setStartTime}
+          errorIndicator={false}
         />
-        <div>
-          <InputLabel id=" finisTimeLabel">Finish Hour</InputLabel>
-          <Select
-            labelId="finisTimeLabel"
-            value={finishTime}
-            onChange={({ target: value }) =>
-              setFinishTime(value.value as number)
-            }
+        <DateTimePickerCustom
+          name="Finish"
+          date={finishDate}
+          time={finishTime}
+          setDate={setFinishDate}
+          setTime={setFinishTime}
+          errorIndicator={dateError}
+        />
+        <Box marginTop={3}>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={() => save()}
           >
-            {hoursArray.map((i) => (
-              <MenuItem key={i} value={i}>
-                {i}
-              </MenuItem>
-            ))}
-          </Select>
-        </div>
-      </div>
-      <Button onClick={() => save()}>Save</Button>
-    </form>
+            Save
+          </Button>
+        </Box>
+      </Box>
+    </ContainerBox>
   );
 };

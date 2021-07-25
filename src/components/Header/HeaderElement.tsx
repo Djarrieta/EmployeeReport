@@ -6,11 +6,17 @@ import { Link } from 'react-router-dom';
 export const HeaderElement = (props: {
   name: string;
   path: string;
+  handleClick: undefined | (() => void);
 }): JSX.Element => {
-  const { name, path } = props;
+  const { name, path, handleClick } = props;
 
   return (
-    <IconButton edge="start" color="inherit" aria-label="SpeakerNotes">
+    <IconButton
+      edge="start"
+      color="inherit"
+      aria-label="SpeakerNotes"
+      onClick={handleClick ? () => handleClick() : undefined}
+    >
       <Link to={path}>
         <Box
           display="flex"

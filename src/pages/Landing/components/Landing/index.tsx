@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
-import {
-  Typography,
-  TextField,
-  Grid,
-  Button,
-  Card,
-  Box,
-} from '@material-ui/core';
+import { Box, Button, Card, TextField } from '@material-ui/core';
+import React, { useState, useContext } from 'react';
 import '../../styles/Landing.scss';
+import { SessionContext } from '../../../../context/SessionContext';
 
 export interface LandingProps {
   onContinue: (name: string) => void;
@@ -15,14 +9,21 @@ export interface LandingProps {
 export const Landing: React.FC<LandingProps> = ({ onContinue }) => {
   const [text, setText] = useState('');
   const [showError, setShowError] = useState(false);
-
+  const {
+    data: { username },
+    mutations: { setAlert },
+  } = useContext(SessionContext);
   const handleInput = () => {
     if (text.length <= 0 || text.includes(':')) {
+      if (setAlert) {
+        setAlert('There is no Username.');
+      }
       setShowError(true);
       return;
     }
     setShowError(false);
     onContinue(text);
+    setAlert(`Hi ${text}! Welcome!`);
   };
   return (
     <Card className="card">

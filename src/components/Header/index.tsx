@@ -1,14 +1,6 @@
 import React, { FC, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import {
-  AppBar,
-  Box,
-  Button,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
-import { SpeakerNotes } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
+import { AppBar, Box, Toolbar } from '@material-ui/core';
 import { SessionContext } from 'context/SessionContext';
 import { deleteSession } from 'services/sessionService';
 import { HeaderElement } from './HeaderElement';
@@ -16,7 +8,7 @@ import { HeaderElement } from './HeaderElement';
 export const Header: FC = () => {
   const {
     data: { sessionId },
-    mutations: { setUsername },
+    mutations: { setUsername, setAlert },
   } = useContext(SessionContext);
 
   const name = sessionId?.split(':::')[1];
@@ -26,6 +18,7 @@ export const Header: FC = () => {
     deleteSession();
     setUsername(undefined);
     history.push('/');
+    setAlert('See you next time.');
   };
   return (
     <AppBar position="static">
@@ -38,14 +31,20 @@ export const Header: FC = () => {
         <Toolbar>
           {sessionId ? (
             <>
-              <HeaderElement name="Reports" path="/Reports" />
-              <HeaderElement name="Employees" path="/Employees" />
-              <Button type="button" onClick={signOut}>
-                <HeaderElement name={name ?? ''} path="/" />
-              </Button>
+              <HeaderElement
+                name="Reports"
+                path="/Reports"
+                handleClick={undefined}
+              />
+              <HeaderElement
+                name="Employees"
+                path="/Employees"
+                handleClick={undefined}
+              />
+              <HeaderElement name={name ?? ''} path="/" handleClick={signOut} />
             </>
           ) : (
-            <HeaderElement name="Login" path="/Login" />
+            <HeaderElement name="Login" path="/Login" handleClick={undefined} />
           )}
         </Toolbar>
       </Box>
