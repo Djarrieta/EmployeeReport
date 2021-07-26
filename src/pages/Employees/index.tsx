@@ -78,7 +78,7 @@ export const EmployeesPage: React.FC<RouteComponentProps> = () => {
 
   return (
     <ContainerBox name="Employees">
-      <div>
+      <>
         <Box className="employees_new">
           <Box display="flex" alignItems="center">
             <TextField
@@ -94,7 +94,7 @@ export const EmployeesPage: React.FC<RouteComponentProps> = () => {
               </Button>
             </Box>
           </Box>
-          <Box>
+          <Box display="flex" alignItems="center">
             <Button variant="contained" size="small" onClick={handleClearHours}>
               Restart
             </Button>
@@ -118,7 +118,7 @@ export const EmployeesPage: React.FC<RouteComponentProps> = () => {
             </Suspense>
           </List>
         </Box>
-      </div>
+      </>
     </ContainerBox>
   );
 };
