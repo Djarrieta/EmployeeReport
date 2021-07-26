@@ -89,6 +89,7 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
         <FormControl>
           <InputLabel id="inputLabelEmployee">Employee</InputLabel>
           <Select
+            name="employeeSelect"
             labelId="inputLabelEmployee"
             error={employeeError}
             value={selectedEmployeeId}

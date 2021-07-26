@@ -83,6 +83,7 @@ export const EmployeesPage: React.FC<RouteComponentProps> = () => {
           <Box display="flex" alignItems="center">
             <TextField
               label="Name"
+              name="employeeName"
               error={errorName}
               value={newEmployeeName}
               onChange={(event) => setNewEmployeeName(event.target.value)}
