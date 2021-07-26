@@ -19,6 +19,9 @@ import { employeesService } from '../Employees/services/employeesService';
 import { DateTimePickerCustom } from './components/DateTimePickerCustom';
 import { addHoursService } from './services/addHoursService';
 
+const DAY_INIT = 7;
+const NIGHT_INIT = 19;
+
 export const ReportPage: React.FC<RouteComponentProps> = () => {
   const [employees, setEmployees] = useState<EmployeeModel[]>([]);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<string>('');
@@ -28,8 +31,8 @@ export const ReportPage: React.FC<RouteComponentProps> = () => {
   const [finishDate, setFinishDate] = useState<string>(
     moment().format(dateFormat),
   );
-  const [startTime, setStartTime] = useState<number>(7);
-  const [finishTime, setFinishTime] = useState<number>(18);
+  const [startTime, setStartTime] = useState<number>(DAY_INIT);
+  const [finishTime, setFinishTime] = useState<number>(NIGHT_INIT);
   const [employeeError, setEmployeeError] = useState<boolean>(false);
   const [dateError, setDateError] = useState<boolean>(false);
   const {
