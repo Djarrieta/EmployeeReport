@@ -13,16 +13,14 @@ pipeline {
           sh 'npm run lint' 
       }
     }
-    stage('Test') {
+    stage('Test'){
       steps {
-        script {
-          sh 'npm run test'
-        }
+          sh 'npm test' 
       }
-      post {
-        always {
-          step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/clover.xml'])
-        }
+    }
+    stage('Test:Coverage'){
+      steps {
+          sh 'npm run test:coverage' 
       }
     }
     stage('Static Code Analysis') {
