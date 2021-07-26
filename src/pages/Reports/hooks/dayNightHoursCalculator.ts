@@ -1,10 +1,7 @@
 import moment from 'moment';
 import { HoursModel } from 'pages/Reports/models/HoursModel';
 import { dateFormat } from 'utils/date';
-
-const DAY_INIT = 6;
-const NIGHT_INIT = 18;
-const HOURS_DAY = 24;
+import { DAY_INIT, NIGHT_INIT, HOURS_DAY } from '../../../constants/keyHours';
 
 const dayNightSelector = (hour: number) => {
   let HD = 0;

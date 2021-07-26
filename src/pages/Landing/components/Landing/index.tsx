@@ -10,7 +10,6 @@ export const Landing: React.FC<LandingProps> = ({ onContinue }) => {
   const [text, setText] = useState('');
   const [showError, setShowError] = useState(false);
   const {
-    data: { username },
     mutations: { setAlert },
   } = useContext(SessionContext);
   const handleInput = () => {
