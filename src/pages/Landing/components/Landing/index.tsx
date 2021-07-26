@@ -27,6 +27,7 @@ export const Landing: React.FC<LandingProps> = ({ onContinue }) => {
   return (
     <Card className="card">
       <TextField
+        name="username"
         fullWidth
         error={showError}
         value={text}
