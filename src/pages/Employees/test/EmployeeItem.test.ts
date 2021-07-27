@@ -3,14 +3,24 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { EmployeeItem } from '../components/EmployeeItem';
 
-test('EmployeeItem displays', () => {
-  const NewEmployeeName="NewEmployeeName"
+const newEmployeeName="newEmployeeName"
+beforeEach(()=>{
+  
   render(
     EmployeeItem({
-      employee: { name: 'NewEmployeeName', id: 1, HD: 1, HN: 1 },
-      handleDelete: () => {},
+      employee: { name: 'newEmployeeName', id: 1, HD: 1, HN: 1 },
+      handleDelete: () => {return  true},
     }),
   );
-  const EmployeeNameElement= screen.getByText('NewEmployeeName')
+})
+
+test('EmployeeItem displays', () => {
+  const EmployeeNameElement= screen.getByText('newEmployeeName')
   expect(EmployeeNameElement).toBeInTheDocument();
+});
+test('delete button ok', () => {
+  const buttonDelete= screen.getByRole('button')
+  const result=fireEvent.click(buttonDelete);
+  expect(result)
+
 });
