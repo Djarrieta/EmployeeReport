@@ -4,6 +4,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
+const userName = 'Dario';
+
 beforeEach(() => {
   render(
     <SessionProvider>
@@ -11,14 +13,18 @@ beforeEach(() => {
     </SessionProvider>,
   );
 });
+test(' UserName errors works', () => {
+  const buttonLogin = screen.getByText('Continue');
+  fireEvent.click(buttonLogin);
+  const displayError = screen.getByText('Incorrect entry.');
+  setTimeout(() => {
+    expect(displayError).toBeInTheDocument();
+  }, 500);
+});
 
 test('login button working and UserName displays', () => {
-  const userName = 'Dario';
   const buttonLogin = screen.getByText('Continue');
   const inputName = screen.getAllByText('Username');
-
-  expect(buttonLogin).toBeInTheDocument();
-  expect(inputName.length).toBeGreaterThan(0);
 
   userEvent.type(inputName[0], userName);
   fireEvent.click(buttonLogin);
@@ -28,3 +34,17 @@ test('login button working and UserName displays', () => {
     expect(displayName).toBeInTheDocument();
   }, 500);
 });
+
+/* test('Employee Page renders ', () => {
+  const buttonLogin = screen.getByText('Continue');
+  const inputName = screen.getAllByText('Username');
+
+  userEvent.type(inputName[0], userName);
+  fireEvent.click(buttonLogin);
+
+  const employeeButton = screen.getAllByRole('link')[1];
+  fireEvent.click(employeeButton);
+  const reportButton = screen.getAllByRole('link')[0];
+  fireEvent.click(reportButton);
+
+}); */
