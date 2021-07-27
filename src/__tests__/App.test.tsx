@@ -32,19 +32,9 @@ test('login button working and UserName displays', () => {
   setTimeout(() => {
     const displayName = screen.getByText(userName);
     expect(displayName).toBeInTheDocument();
+    const reportButton = screen.getAllByRole('link')[1];
+    fireEvent.click(reportButton);
+
+    expect(window.location.pathname).toEqual('/Reports');
   }, 500);
 });
-
-/* test('Employee Page renders ', () => {
-  const buttonLogin = screen.getByText('Continue');
-  const inputName = screen.getAllByText('Username');
-
-  userEvent.type(inputName[0], userName);
-  fireEvent.click(buttonLogin);
-
-  const employeeButton = screen.getAllByRole('link')[1];
-  fireEvent.click(employeeButton);
-  const reportButton = screen.getAllByRole('link')[0];
-  fireEvent.click(reportButton);
-
-}); */
