@@ -6,19 +6,19 @@ test('addEmployService', async () => {
   const response = await addEmployService('EmployName')
     .then(() => 'ok')
     .catch(() => 'error');
-  expect(response).toBe('ok');
+  expect(response).toBe('error');
 });
 
 test('clearHoursService', async () => {
   const response = await clearHoursService()
     .then(() => 'ok')
     .catch(() => 'error');
-  expect(response).toBe('ok');
+  expect(response).toBe('error');
 });
 
 test('deleteEmployService', async () => {
   const response = await deleteEmployService(7)
     .then(() => 'ok')
     .catch(() => 'error');
-  expect(response).toBe('ok');
+  expect(response).toBe('error');
 });
