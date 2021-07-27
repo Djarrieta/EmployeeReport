@@ -13,7 +13,6 @@ beforeEach(()=>{
     }),
   );
 })
-
 test('EmployeeItem displays', () => {
   const EmployeeNameElement= screen.getByText('newEmployeeName')
   expect(EmployeeNameElement).toBeInTheDocument();
