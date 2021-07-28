@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { LandingPage } from 'pages/Landing';
 import { ReportPage } from 'pages/Reports';
 import { EmployeesPage } from 'pages/Employees';
