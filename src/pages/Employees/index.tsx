@@ -83,6 +83,7 @@ export const EmployeesPage: React.FC = () => {
           <Box display="flex" alignItems="center">
             <TextField
               label="Name"
+              data-testid="employeeName"
               name="employeeName"
               error={errorName}
               value={newEmployeeName}

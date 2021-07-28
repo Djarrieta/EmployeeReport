@@ -47,3 +47,27 @@ test('change route to Employees', () => {
 
   expect(window.location.pathname).toBe('/Employees');
 });
+
+test('click on add butto with error', () => {
+  const buttonAdd = screen.getByText('Add');
+  fireEvent.click(buttonAdd);
+
+  const displayError = screen.getByText(
+    'Dario, there is no name for the new employee.',
+  );
+  setTimeout(() => {
+    expect(displayError).toBeInTheDocument();
+  }, 500);
+});
+
+test('click on add button success', () => {
+  const buttonAdd = screen.getByText('Add');
+  const inputText = screen.getByTestId('employeeName');
+  userEvent.type(inputText, 'hola');
+  fireEvent.click(buttonAdd);
+
+  setTimeout(() => {
+    const displayError = screen.getByText('hola has been created.');
+    expect(displayError).toBeInTheDocument();
+  }, 500);
+});
