@@ -34,13 +34,6 @@ test('login button working and UserName displays', () => {
   }, 500);
 });
 
-test('change route to Reports', () => {
-  const buttonReports = screen.getAllByText('Reports')[0];
-  fireEvent.click(buttonReports);
-
-  expect(window.location.pathname).toBe('/Reports');
-});
-
 test('change route to Employees', () => {
   const buttonEmployees = screen.getAllByText('Employees')[0];
   fireEvent.click(buttonEmployees);
@@ -70,4 +63,11 @@ test('click on add button success', () => {
     const displayError = screen.getByText('hola has been created.');
     expect(displayError).toBeInTheDocument();
   }, 500);
+});
+
+test('change route to Reports', () => {
+  const buttonReports = screen.getAllByText('Reports')[0];
+  fireEvent.click(buttonReports);
+
+  expect(window.location.pathname).toBe('/Reports');
 });

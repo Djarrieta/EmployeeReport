@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useRef, useState } from 'react';
 import { SessionState } from 'context/models/SessionState';
 import * as sessionService from '../services/sessionService';
 
-export const useStateContainer = (
+const useStateContainer = (
   initialState: SessionState = {},
 ): {
   data: { username: string | undefined; sessionId: string | undefined };
