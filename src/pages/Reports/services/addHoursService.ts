@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import axios from 'axios';
 import { URL } from '../../../constants/URL';
 import { HoursModel } from '../models/HoursModel';

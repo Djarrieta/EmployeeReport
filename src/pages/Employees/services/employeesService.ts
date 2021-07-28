@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import axios from 'axios';
 import { EmployeeModel } from '../models/EmployeeModel';
 import { URL } from '../../../constants/URL';

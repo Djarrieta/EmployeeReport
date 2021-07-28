@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { v4 as uuidv4 } from 'uuid';
 import { SessionState } from 'context/models/SessionState';
 
