@@ -7,12 +7,15 @@ describe('Employees test', () => {
     cy.contains('a', 'Employees').click()
     cy.url().should('include', '/Employees')
   })
-  it('Add new Employee success', () => {
+  it('Add new Employee error', () => {
     cy.contains('button','Add').click()
   });
   it('Add new Employee success', () => {
     cy.get('input[name=employeeName]').type("NewEmployName")
     cy.contains('button','Add').click()
   });
+  it('Restart button', ()=>{
+    cy.contains('button','Restart').click()
+  })
 
 });
