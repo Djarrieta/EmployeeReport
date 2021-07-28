@@ -1,3 +1,6 @@
 {
-  "collectCoverageFrom": ["**/*.{ts,tsx}","!**/services/**", "!**Service.ts"]
+  "collectCoverageFrom": ["**/*.{ts,tsx}","!**/services/**", "!**Service.ts"],
+  "codeCoverageExclude": [
+    "/**/*ervice*.ts"
+  ]
 }

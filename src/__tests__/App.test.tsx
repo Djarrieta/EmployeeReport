@@ -71,3 +71,14 @@ test('change route to Reports', () => {
 
   expect(window.location.pathname).toBe('/Reports');
 });
+test('click to save with error', () => {
+  const buttonAdd = screen.getByText('Save');
+  fireEvent.click(buttonAdd);
+
+  setTimeout(() => {
+    const displayError = screen.getByText(
+      'Dario, theres is no employee selected.',
+    );
+    expect(displayError).toBeInTheDocument();
+  }, 500);
+});
