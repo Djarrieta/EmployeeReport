@@ -50,9 +50,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false --config=jestconfig.json",
+    "test": "react-scripts test --watchAll=false",
+    "test:config": "react-scripts test --watchAll=false --config=jestconfig.json",
     "test:watch": "react-scripts test --watchAll",
-    "test:coverage": "react-scripts test --watchAll=false --coverage",
+    "test:coverage": "react-scripts test:config --watchAll=false --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint --fix src/**/*.{ts,tsx}",
     "server": "json-server --watch ./server/db.json --port 3001",
