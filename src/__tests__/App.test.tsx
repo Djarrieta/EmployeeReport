@@ -82,3 +82,9 @@ test('click to save with error', () => {
     expect(displayError).toBeInTheDocument();
   }, 500);
 });
+test('change signOut', () => {
+  const buttonEmployees = screen.getAllByText('Dario')[0];
+  fireEvent.click(buttonEmployees);
+
+  expect(window.location.pathname).toBe('/');
+});
