@@ -6,5 +6,5 @@ export const employeesService = async (): Promise<EmployeeModel[]> => {
   return axios
     .get(`${URL}/employees`)
     .then((response) => response.data)
-    .catch((error) => error);
+    .catch(() => 'error');
 };

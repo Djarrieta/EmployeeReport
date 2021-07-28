@@ -7,6 +7,7 @@ export const deleteEmployService = async (
   if (employId) {
     await axios
       .delete(`${URL}/employees/${employId}`)
-      .then((response) => response.data);
+      .then((response) => response.data)
+      .catch(() => 'error');
   }
 };

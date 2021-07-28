@@ -23,7 +23,7 @@ const EmployeeItem = lazy(() =>
   }),
 );
 
-export const EmployeesPage: React.FC<RouteComponentProps> = () => {
+export const EmployeesPage: React.FC = () => {
   const [employees, setEmployees] = useState<EmployeeModel[]>([]);
   const [newEmployeeName, setNewEmployeeName] = useState<string>('');
   const [errorName, setErrorName] = useState<boolean>(false);
