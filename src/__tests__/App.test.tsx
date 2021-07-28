@@ -25,16 +25,25 @@ test(' UserName errors works', () => {
 test('login button working and UserName displays', () => {
   const buttonLogin = screen.getByText('Continue');
   const inputName = screen.getAllByText('Username');
-
   userEvent.type(inputName[0], userName);
   fireEvent.click(buttonLogin);
 
   setTimeout(() => {
     const displayName = screen.getByText(userName);
     expect(displayName).toBeInTheDocument();
-    const reportButton = screen.getAllByRole('link')[1];
-    fireEvent.click(reportButton);
-
-    expect(window.location.pathname).toEqual('/Reports');
   }, 500);
+});
+
+test('change route to Reports', () => {
+  const buttonReports = screen.getAllByText('Reports')[0];
+  fireEvent.click(buttonReports);
+
+  expect(window.location.pathname).toBe('/Reports');
+});
+
+test('change route to Employees', () => {
+  const buttonEmployees = screen.getAllByText('Employees')[0];
+  fireEvent.click(buttonEmployees);
+
+  expect(window.location.pathname).toBe('/Employees');
 });
