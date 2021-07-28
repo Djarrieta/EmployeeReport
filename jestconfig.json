@@ -1,3 +1,3 @@
 {
-  "collectCoverageFrom": ["**/*.{ts,tsx}","!**/services/**", "!<rootDir>/**ervice*.ts","!**/*.{scss}"]
+  "collectCoverageFrom": [ "!<rootDir>/**ervice*.ts","!<rootDir>/**/*.{scss}"]
 }
